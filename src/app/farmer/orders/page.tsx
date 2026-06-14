@@ -1,5 +1,7 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+
 import { useAuth } from '@/lib/contexts/AuthContext';
 import { apiRequest } from '@/lib/api';
 import { useSearchParams, useRouter } from 'next/navigation';
