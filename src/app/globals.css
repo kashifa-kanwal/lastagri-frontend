@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-primary: #2f7f33;
+  --color-background-light: #f6f8f6;
+  --color-background-dark: #141e15;
+  --color-indus-green: #2A7F62;
+  --color-trust-blue: #005A8D;
+  --color-alert-red: #D9534F;
+  --color-off-white: #F8F9FA;
+  --color-charcoal: #343A40;
+
+  --font-display: var(--font-inter), sans-serif;
+  --font-urdu: var(--font-noto-nastaliq-urdu), serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* RTL Support */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+[dir="rtl"] input[type="number"] {
+  text-align: left;
+}
+
+/* RTL scrollbar positioning */
+[dir="rtl"] ::-webkit-scrollbar {
+  direction: rtl;
+}
