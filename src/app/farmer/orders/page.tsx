@@ -1,11 +1,9 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
 import { useAuth } from '@/lib/contexts/AuthContext';
 import { apiRequest } from '@/lib/api';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 type OrderStatus = 'PENDING' | 'CONFIRMED' | 'PACKED' | 'SHIPPED' | 'OUT_FOR_DELIVERY' | 'DELIVERED' | 'CANCELLED';
@@ -36,7 +34,7 @@ const STATUS_CONFIG: Record<string, { color: string; bg: string; icon: string; l
 
 const TRACKING_STEPS = ['PENDING', 'CONFIRMED', 'PACKED', 'SHIPPED', 'OUT_FOR_DELIVERY', 'DELIVERED'];
 
-export default function OrdersPage() {
+function OrdersPageInner() {
     const { user } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -282,5 +280,13 @@ const getStepIndex = (status: string) => TRACKING_STEPS.indexOf(status);
                 </div>
             )}
         </div>
+    );
+}
+
+export default function OrdersPage() {
+    return (
+        <Suspense fallback={null}>
+            <OrdersPageInner />
+        </Suspense>
     );
 }

@@ -1,8 +1,6 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { apiRequest } from '@/lib/api';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/lib/contexts/ToastContext';
@@ -24,7 +22,7 @@ interface KYCData {
     suppliers: KYCUser[];
 }
 
-export default function KYCVerificationPage() {
+function KYCVerificationPageInner() {
     const searchParams = useSearchParams();
     const { showToast } = useToast();
     const [activeTab, setActiveTab] = useState<'pending' | 'approved' | 'rejected'>(
@@ -292,5 +290,13 @@ export default function KYCVerificationPage() {
                 </div>
             )}
         </div>
+    );
+}
+
+export default function KYCVerificationPage() {
+    return (
+        <Suspense fallback={null}>
+            <KYCVerificationPageInner />
+        </Suspense>
     );
 }
